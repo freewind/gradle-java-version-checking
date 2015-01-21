@@ -1,0 +1,29 @@
+import org.gradle.internal.jvm.Jvm
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+
+def checkJavaVersion(String minVersion) {
+    def specVersion = System.getProperty('java.specification.version')
+    if (specVersion < minVersion) {
+        throw new Error("Jdk $minVersion or above is required, current: ${Jvm.current()}")
+    }
+}
+
+checkJavaVersion("1.8")
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            'org.apache.commons:commons-lang3:3.2.1',
+            'org.apache.commons:commons-io:1.3.2',
+            'com.google.guava:guava:16.0'
+    )
+    testCompile(
+            'junit:junit:4.11'
+    )
+}
