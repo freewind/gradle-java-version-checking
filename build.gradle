@@ -1,5 +1,3 @@
-import org.gradle.internal.jvm.Jvm
-
 apply plugin: 'java'
 apply plugin: 'idea'
 
@@ -23,6 +21,7 @@ dependencies {
 def checkJavaVersion(String minVersion) {
     def specVersion = System.getProperty('java.specification.version')
     if (specVersion < minVersion) {
-        throw new Error("Jdk $minVersion or above is required, current: ${Jvm.current()}")
+        def currentVersion = org.gradle.internal.jvm.Jvm.current()
+        throw new Error("Jdk $minVersion or above is required, current: $currentVersion")
     }
 }
