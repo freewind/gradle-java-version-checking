@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 
+showHowToGetJavaVersions()
 checkJavaVersion("1.8")
 
 repositories {
@@ -24,4 +25,14 @@ def checkJavaVersion(String minVersion) {
         def currentVersion = org.gradle.internal.jvm.Jvm.current()
         throw new Error("Jdk $minVersion or above is required, current: $currentVersion")
     }
+}
+
+def showHowToGetJavaVersions() {
+    println "java.version: " + System.getProperty("java.version")
+    println "java.specification.version: " + System.getProperty('java.specification.version')
+    println "java.vm.version: " + System.getProperty('java.vm.version')
+    println "java.runtime.version: " + System.getProperty('java.runtime.version')
+    println "org.gradle.internal.SystemProperties.getJavaVersion(): " + org.gradle.internal.SystemProperties.getJavaVersion()
+    println "org.gradle.internal.jvm.Jvm.current(): " + org.gradle.internal.jvm.Jvm.current()
+    println "org.gradle.api.JavaVersion.current(): " + org.gradle.api.JavaVersion.current()
 }
